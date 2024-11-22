@@ -1,6 +1,7 @@
 package com.smilego.smilego.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,10 +10,11 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 public class Payment {
     private Long id;
-    private String subscriptionId;
+    private Long subscriptionId;
     private BigDecimal amount;
     private String status;
     private String method;
