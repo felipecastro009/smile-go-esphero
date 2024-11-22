@@ -2,10 +2,8 @@ package com.smilego.smilego.infra.controllers.payments;
 
 import com.smilego.smilego.application.usecases.payments.DeletePaymentUseCase;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
@@ -14,6 +12,7 @@ public class DeletePaymentController {
     private final DeletePaymentUseCase deletePaymentUseCase;
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void handle(@PathVariable Long id) {
         deletePaymentUseCase.execute(id);
     }

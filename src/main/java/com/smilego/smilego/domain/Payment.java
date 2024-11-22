@@ -19,4 +19,6 @@ public class Payment {
     private String status;
     private String method;
     private LocalDateTime paymentDate;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }

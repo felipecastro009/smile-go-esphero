@@ -1,7 +1,6 @@
 package com.smilego.smilego.infra.controllers.subscriptions;
 
 import com.smilego.smilego.application.usecases.subscriptions.UpdateSubscriptionUseCase;
-import com.smilego.smilego.domain.Subscription;
 import com.smilego.smilego.infra.controllers.dtos.subscriptions.mappers.SubscriptionDTOMapper;
 import com.smilego.smilego.infra.controllers.dtos.subscriptions.requests.UpdateSubscriptionRequest;
 import lombok.AllArgsConstructor;
@@ -17,7 +16,6 @@ public class UpdateSubscriptionController {
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void handle(@PathVariable Long id, @RequestBody UpdateSubscriptionRequest request) {
-        Subscription subscription = SubscriptionDTOMapper.updateSubscriptionToDomain(id, request);
-        updateSubscriptionUseCase.execute(subscription);
+        updateSubscriptionUseCase.execute(SubscriptionDTOMapper.updateSubscriptionToDomain(id, request));
     }
 }

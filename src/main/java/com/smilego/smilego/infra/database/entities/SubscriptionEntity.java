@@ -35,6 +35,4 @@ public class SubscriptionEntity {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-    @OneToMany(mappedBy = "subscription", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<PaymentEntity> payments;
 }

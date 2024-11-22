@@ -13,6 +13,8 @@ public class PaymentMapper {
                 .method(paymentEntity.getMethod())
                 .status(paymentEntity.getStatus())
                 .subscriptionId(paymentEntity.getSubscriptionId())
+                .createdAt(paymentEntity.getCreatedAt())
+                .updatedAt(paymentEntity.getUpdatedAt())
                 .build();
     }
 
@@ -25,6 +27,8 @@ public class PaymentMapper {
                 .status(subscription.getStatus())
                 .paymentDate(subscription.getPaymentDate())
                 .subscriptionId(subscription.getSubscriptionId())
+                .createdAt(subscription.getCreatedAt())
+                .updatedAt(subscription.getUpdatedAt())
                 .build();
     }
 }

@@ -1,7 +1,6 @@
 package com.smilego.smilego.infra.controllers.subscriptions;
 
 import com.smilego.smilego.application.usecases.subscriptions.CreateSubscriptionUseCase;
-import com.smilego.smilego.domain.Subscription;
 import com.smilego.smilego.infra.controllers.dtos.subscriptions.mappers.SubscriptionDTOMapper;
 import com.smilego.smilego.infra.controllers.dtos.subscriptions.requests.CreateSubscriptionRequest;
 import lombok.AllArgsConstructor;
@@ -17,7 +16,6 @@ public class CreateSubscriptionController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void handle(@RequestBody CreateSubscriptionRequest request) {
-        Subscription subscription = SubscriptionDTOMapper.createSubscriptionToDomain(request);
-        createSubscriptionUseCase.execute(subscription);
+        createSubscriptionUseCase.execute(SubscriptionDTOMapper.createSubscriptionToDomain(request));
     }
 }

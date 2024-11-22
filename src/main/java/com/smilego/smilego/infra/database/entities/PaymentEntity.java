@@ -19,7 +19,7 @@ public class PaymentEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "subscription_id", insertable = false, updatable = false)
+    @Column(name = "subscription_id")
     private Long subscriptionId;
     @Column(name = "amount")
     private BigDecimal amount;
@@ -35,7 +35,4 @@ public class PaymentEntity {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "subscription_id", referencedColumnName = "id", nullable = false)
-    private SubscriptionEntity subscription;
 }
