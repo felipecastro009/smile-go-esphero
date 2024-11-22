@@ -5,15 +5,13 @@ import com.smilego.smilego.domain.Subscription;
 import com.smilego.smilego.infra.database.entities.SubscriptionEntity;
 import com.smilego.smilego.infra.database.mappers.SubscriptionMapper;
 import com.smilego.smilego.infra.database.persistence.SubscriptionPersistence;
+import lombok.AllArgsConstructor;
 
 import java.util.List;
 
+@AllArgsConstructor
 public class SubscriptionRepositoryImpl implements SubscriptionRepository {
     private final SubscriptionPersistence subscriptionPersistence;
-
-    public SubscriptionRepositoryImpl(SubscriptionPersistence subscriptionPersistence) {
-        this.subscriptionPersistence = subscriptionPersistence;
-    }
 
     @Override
     public Subscription create(Subscription subscription) {
@@ -33,8 +31,7 @@ public class SubscriptionRepositoryImpl implements SubscriptionRepository {
     }
 
     @Override
-    public Void delete(Long id) {
+    public void delete(Long id) {
         subscriptionPersistence.deleteById(id);
-        return null;
     }
 }

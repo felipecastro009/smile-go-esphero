@@ -8,5 +8,6 @@ public interface PaymentRepository {
     public Payment create(Payment payment);
     public Payment update(Payment payment);
     public List<Payment> find();
-    public Void delete(Long id);
+    public void delete(Long id);
+    public List<Payment> findBySubscriptionId(Long id);
 }

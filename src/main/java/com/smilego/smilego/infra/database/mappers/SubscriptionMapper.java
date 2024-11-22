@@ -13,6 +13,8 @@ public class SubscriptionMapper {
                  .status(subscriptionEntity.getStatus())
                  .startDate(subscriptionEntity.getStartDate())
                  .endDate(subscriptionEntity.getEndDate())
+                 .createdAt(subscriptionEntity.getCreatedAt())
+                 .updatedAt(subscriptionEntity.getUpdatedAt())
                  .build();
     }
 
@@ -25,6 +27,8 @@ public class SubscriptionMapper {
                 .status(subscription.getStatus())
                 .startDate(subscription.getStartDate())
                 .endDate(subscription.getEndDate())
+                .createdAt(subscription.getCreatedAt())
+                .updatedAt(subscription.getUpdatedAt())
                 .build();
     }
 }

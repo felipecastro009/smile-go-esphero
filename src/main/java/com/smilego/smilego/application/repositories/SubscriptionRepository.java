@@ -8,5 +8,5 @@ public interface SubscriptionRepository {
     public Subscription create(Subscription subscription);
     public Subscription update(Subscription subscription);
     public List<Subscription> find();
-    public Void delete(Long id);
+    public void delete(Long id);
 }

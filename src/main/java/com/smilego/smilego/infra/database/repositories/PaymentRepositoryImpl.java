@@ -5,15 +5,13 @@ import com.smilego.smilego.domain.Payment;
 import com.smilego.smilego.infra.database.entities.PaymentEntity;
 import com.smilego.smilego.infra.database.mappers.PaymentMapper;
 import com.smilego.smilego.infra.database.persistence.PaymentPersistence;
+import lombok.AllArgsConstructor;
 
 import java.util.List;
 
+@AllArgsConstructor
 public class PaymentRepositoryImpl implements PaymentRepository {
     private final PaymentPersistence paymentPersistence;
-
-    public PaymentRepositoryImpl(PaymentPersistence paymentPersistence) {
-        this.paymentPersistence = paymentPersistence;
-    }
 
     @Override
     public Payment create(Payment payment) {
@@ -33,8 +31,12 @@ public class PaymentRepositoryImpl implements PaymentRepository {
     }
 
     @Override
-    public Void delete(Long id) {
+    public void delete(Long id) {
         paymentPersistence.deleteById(id);
-        return null;
+    }
+
+    @Override
+    public List<Payment> findBySubscriptionId(Long id) {
+        return paymentPersistence.findAllBySubscriptionId(id).stream().map(PaymentMapper::toDomain).toList();
     }
 }

@@ -18,4 +18,6 @@ public class Subscription {
     private String status;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }
