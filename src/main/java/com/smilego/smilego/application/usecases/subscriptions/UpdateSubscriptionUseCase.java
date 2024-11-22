@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 public class UpdateSubscriptionUseCase {
     private final SubscriptionRepository subscriptionRepository;
 
-    public void execute(Subscription subscription) {
-        subscriptionRepository.update(subscription);
+    public Subscription execute(Subscription subscription) {
+        return subscriptionRepository.update(subscription);
     }
 }
