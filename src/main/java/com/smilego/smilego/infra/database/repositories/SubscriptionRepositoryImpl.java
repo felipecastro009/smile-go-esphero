@@ -9,7 +9,6 @@ import com.smilego.smilego.infra.database.persistence.SubscriptionPersistence;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
-import java.util.Objects;
 
 @AllArgsConstructor
 public class SubscriptionRepositoryImpl implements SubscriptionRepository {
