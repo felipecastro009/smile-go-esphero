@@ -10,6 +10,7 @@ import java.util.List;
 public class FindAllSubscriptionUseCase {
     private final SubscriptionRepository subscriptionRepository;
     public List<Subscription> execute() {
-        return subscriptionRepository.find();
+        List<Subscription> database = subscriptionRepository.find();
+        return database;
     }
 }
