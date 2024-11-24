@@ -39,4 +39,6 @@ public class SubscriptionEntity {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+    @OneToMany(mappedBy = "subscription")
+    private List<PaymentEntity> payments;
 }
