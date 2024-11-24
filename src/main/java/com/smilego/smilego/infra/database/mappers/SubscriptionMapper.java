@@ -13,6 +13,7 @@ public class SubscriptionMapper {
                  .status(subscriptionEntity.getStatus())
                  .startDate(subscriptionEntity.getStartDate())
                  .endDate(subscriptionEntity.getEndDate())
+                 .payments(subscriptionEntity.getPayments().stream().map(PaymentMapper::toDomain).toList())
                  .createdAt(subscriptionEntity.getCreatedAt())
                  .updatedAt(subscriptionEntity.getUpdatedAt())
                  .build();

@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,6 +19,7 @@ public class Subscription {
     private Long clientId;
     private SubscriptionPlanEnum plan;
     private SubscriptionStatusEnum status;
+    private List<Payment> payments;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private LocalDateTime createdAt;

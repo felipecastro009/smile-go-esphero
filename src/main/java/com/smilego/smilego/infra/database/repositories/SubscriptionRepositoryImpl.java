@@ -2,6 +2,7 @@ package com.smilego.smilego.infra.database.repositories;
 
 import com.smilego.smilego.application.repositories.SubscriptionRepository;
 import com.smilego.smilego.domain.Subscription;
+import com.smilego.smilego.domain.enums.SubscriptionStatusEnum;
 import com.smilego.smilego.infra.database.entities.SubscriptionEntity;
 import com.smilego.smilego.infra.database.mappers.SubscriptionMapper;
 import com.smilego.smilego.infra.database.persistence.SubscriptionPersistence;
@@ -33,5 +34,10 @@ public class SubscriptionRepositoryImpl implements SubscriptionRepository {
     @Override
     public void delete(Long id) {
         subscriptionPersistence.deleteById(id);
+    }
+
+    @Override
+    public List<Subscription> findAllByStatusWithPayments(SubscriptionStatusEnum status) {
+        return subscriptionPersistence.findAllByStatusWithPayments(status).stream().map(SubscriptionMapper::toDomain).toList();
     }
 }
