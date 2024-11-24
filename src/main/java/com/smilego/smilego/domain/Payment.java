@@ -1,5 +1,7 @@
 package com.smilego.smilego.domain;
 
+import com.smilego.smilego.domain.enums.PaymentMethodEnum;
+import com.smilego.smilego.domain.enums.PaymentStatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,8 +18,8 @@ public class Payment {
     private Long id;
     private Long subscriptionId;
     private BigDecimal amount;
-    private String status;
-    private String method;
+    private PaymentStatusEnum status;
+    private PaymentMethodEnum method;
     private LocalDateTime paymentDate;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

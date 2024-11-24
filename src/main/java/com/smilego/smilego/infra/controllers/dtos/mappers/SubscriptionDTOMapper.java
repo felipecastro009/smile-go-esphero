@@ -1,9 +1,9 @@
-package com.smilego.smilego.infra.controllers.dtos.subscriptions.mappers;
+package com.smilego.smilego.infra.controllers.dtos.mappers;
 
 import com.smilego.smilego.domain.Subscription;
-import com.smilego.smilego.infra.controllers.dtos.subscriptions.requests.CreateSubscriptionRequest;
-import com.smilego.smilego.infra.controllers.dtos.subscriptions.requests.UpdateSubscriptionRequest;
-import com.smilego.smilego.infra.controllers.dtos.subscriptions.responses.SubscriptionResponse;
+import com.smilego.smilego.infra.controllers.dtos.requests.CreateSubscriptionRequest;
+import com.smilego.smilego.infra.controllers.dtos.requests.UpdateSubscriptionRequest;
+import com.smilego.smilego.infra.controllers.dtos.responses.SubscriptionResponse;
 
 public class SubscriptionDTOMapper {
     public static Subscription createSubscriptionToDomain(CreateSubscriptionRequest request) {

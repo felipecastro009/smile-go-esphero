@@ -1,8 +1,8 @@
 package com.smilego.smilego.infra.controllers.payments;
 
 import com.smilego.smilego.application.events.SendUpdatePaymentEvent;
-import com.smilego.smilego.infra.controllers.dtos.subscriptions.mappers.PaymentDTOMapper;
-import com.smilego.smilego.infra.controllers.dtos.subscriptions.requests.UpdatePaymentRequest;
+import com.smilego.smilego.infra.controllers.dtos.mappers.PaymentDTOMapper;
+import com.smilego.smilego.infra.controllers.dtos.requests.UpdatePaymentRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

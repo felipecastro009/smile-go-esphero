@@ -1,5 +1,7 @@
 package com.smilego.smilego.infra.database.entities;
 
+import com.smilego.smilego.domain.enums.SubscriptionPlanEnum;
+import com.smilego.smilego.domain.enums.SubscriptionStatusEnum;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -22,9 +24,11 @@ public class SubscriptionEntity {
     @Column(name = "client_id")
     private Long clientId;
     @Column(name = "plan")
-    private String plan;
+    @Enumerated(EnumType.STRING)
+    private SubscriptionPlanEnum plan;
     @Column(name = "status")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private SubscriptionStatusEnum status;
     @Column(name = "start_date")
     private LocalDateTime startDate;
     @Column(name = "end_date")

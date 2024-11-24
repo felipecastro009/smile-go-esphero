@@ -1,5 +1,7 @@
 package com.smilego.smilego.infra.database.entities;
 
+import com.smilego.smilego.domain.enums.PaymentMethodEnum;
+import com.smilego.smilego.domain.enums.PaymentStatusEnum;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -24,9 +26,11 @@ public class PaymentEntity {
     @Column(name = "amount")
     private BigDecimal amount;
     @Column(name = "status")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private PaymentStatusEnum status;
     @Column(name = "method")
-    private String method;
+    @Enumerated(EnumType.STRING)
+    private PaymentMethodEnum method;
     @Column(name = "payment_date")
     private LocalDateTime paymentDate;
     @CreationTimestamp

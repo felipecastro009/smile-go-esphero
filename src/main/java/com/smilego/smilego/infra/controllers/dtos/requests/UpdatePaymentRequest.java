@@ -1,6 +1,8 @@
-package com.smilego.smilego.infra.controllers.dtos.subscriptions.requests;
+package com.smilego.smilego.infra.controllers.dtos.requests;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.smilego.smilego.domain.enums.PaymentMethodEnum;
+import com.smilego.smilego.domain.enums.PaymentStatusEnum;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -8,8 +10,8 @@ import java.time.LocalDateTime;
 public record UpdatePaymentRequest(
     Long subscriptionId,
     BigDecimal amount,
-    String method,
-    String status,
+    PaymentMethodEnum method,
+    PaymentStatusEnum status,
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
     LocalDateTime paymentDate
 ) {}

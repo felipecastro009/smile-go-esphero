@@ -1,9 +1,9 @@
-package com.smilego.smilego.infra.controllers.dtos.subscriptions.mappers;
+package com.smilego.smilego.infra.controllers.dtos.mappers;
 
 import com.smilego.smilego.domain.Payment;
-import com.smilego.smilego.infra.controllers.dtos.subscriptions.requests.CreatePaymentRequest;
-import com.smilego.smilego.infra.controllers.dtos.subscriptions.requests.UpdatePaymentRequest;
-import com.smilego.smilego.infra.controllers.dtos.subscriptions.responses.PaymentResponse;
+import com.smilego.smilego.infra.controllers.dtos.requests.CreatePaymentRequest;
+import com.smilego.smilego.infra.controllers.dtos.requests.UpdatePaymentRequest;
+import com.smilego.smilego.infra.controllers.dtos.responses.PaymentResponse;
 
 public class PaymentDTOMapper {
     public static Payment createPaymentToDomain(CreatePaymentRequest request) {

@@ -1,5 +1,7 @@
 package com.smilego.smilego.domain;
 
+import com.smilego.smilego.domain.enums.SubscriptionPlanEnum;
+import com.smilego.smilego.domain.enums.SubscriptionStatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,8 +16,8 @@ import java.time.LocalDateTime;
 public class Subscription {
     private Long id;
     private Long clientId;
-    private String plan;
-    private String status;
+    private SubscriptionPlanEnum plan;
+    private SubscriptionStatusEnum status;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private LocalDateTime createdAt;

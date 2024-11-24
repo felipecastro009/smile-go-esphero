@@ -15,7 +15,11 @@ public class ProcessUpdatePaymentEventImpl implements ProcessUpdatePaymentEvent 
     @Override
     @RabbitListener(queues = RabbitMQConfig.QUEUE_NAME)
     public void process(Payment payment) {
-        updatePaymentUseCase.execute(payment);
-        log.info("Payment message processed: {}", payment);
+        try {
+            updatePaymentUseCase.execute(payment);
+            log.info("Payment message processed: {}", payment);
+        } catch (Exception e) {
+            log.error("Error processing payment message: {}", payment, e);
+        }
     }
 }
