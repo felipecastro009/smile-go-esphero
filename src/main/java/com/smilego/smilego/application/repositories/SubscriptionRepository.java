@@ -11,4 +11,5 @@ public interface SubscriptionRepository {
     List<Subscription> find();
     void delete(Long id);
     List<Subscription> findAllByStatusWithPayments(SubscriptionStatusEnum status);
+    Subscription findById(Long id);
 }

@@ -4,6 +4,7 @@ import com.smilego.smilego.application.events.ProcessUpdatePaymentEvent;
 import com.smilego.smilego.application.events.SendUpdatePaymentEvent;
 import com.smilego.smilego.application.gateways.PaymentGateway;
 import com.smilego.smilego.application.repositories.PaymentRepository;
+import com.smilego.smilego.application.repositories.SubscriptionRepository;
 import com.smilego.smilego.application.usecases.payments.*;
 import com.smilego.smilego.infra.database.persistence.PaymentPersistence;
 import com.smilego.smilego.infra.database.repositories.PaymentRepositoryImpl;
@@ -33,8 +34,12 @@ public class PaymentConfig {
     }
 
     @Bean
-    public CreatePaymentUseCase createPaymentUseCase(PaymentRepository paymentRepository, PaymentGateway paymentGateway) {
-        return new CreatePaymentUseCase(paymentRepository, paymentGateway);
+    public CreatePaymentUseCase createPaymentUseCase(
+            PaymentRepository paymentRepository,
+            PaymentGateway paymentGateway,
+            SubscriptionRepository subscriptionRepository
+    ) {
+        return new CreatePaymentUseCase(paymentRepository, paymentGateway, subscriptionRepository);
     }
 
     @Bean
@@ -43,8 +48,12 @@ public class PaymentConfig {
     }
 
     @Bean
-    public UpdatePaymentUseCase updatePaymentUseCase(PaymentRepository paymentRepository, PaymentGateway paymentGateway) {
-        return new UpdatePaymentUseCase(paymentRepository, paymentGateway);
+    public UpdatePaymentUseCase updatePaymentUseCase(
+            PaymentRepository paymentRepository,
+            PaymentGateway paymentGateway,
+            SubscriptionRepository subscriptionRepository
+    ) {
+        return new UpdatePaymentUseCase(paymentRepository, paymentGateway, subscriptionRepository);
     }
 
     @Bean

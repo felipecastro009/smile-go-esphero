@@ -3,6 +3,8 @@ package com.smilego.smilego.infra.database.mappers;
 import com.smilego.smilego.domain.Subscription;
 import com.smilego.smilego.infra.database.entities.SubscriptionEntity;
 
+import java.util.ArrayList;
+
 public class SubscriptionMapper {
     public static Subscription toDomain(SubscriptionEntity subscriptionEntity) {
          return Subscription
@@ -13,7 +15,10 @@ public class SubscriptionMapper {
                  .status(subscriptionEntity.getStatus())
                  .startDate(subscriptionEntity.getStartDate())
                  .endDate(subscriptionEntity.getEndDate())
-                 .payments(subscriptionEntity.getPayments().stream().map(PaymentMapper::toDomain).toList())
+                 .payments(
+                         subscriptionEntity.getPayments() == null ?
+                                 new ArrayList<>() :
+                                 subscriptionEntity.getPayments().stream().map(PaymentMapper::toDomain).toList())
                  .createdAt(subscriptionEntity.getCreatedAt())
                  .updatedAt(subscriptionEntity.getUpdatedAt())
                  .build();

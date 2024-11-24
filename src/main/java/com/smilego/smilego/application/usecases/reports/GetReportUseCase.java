@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Stream;
 
 @AllArgsConstructor
 public class GetReportUseCase {
@@ -19,7 +20,10 @@ public class GetReportUseCase {
         List<Subscription>  subscriptionsActive = subscriptionRepository.findAllByStatusWithPayments(SubscriptionStatusEnum.ACTIVE);
         List<Subscription>  subscriptionsCanceled = subscriptionRepository.findAllByStatusWithPayments(SubscriptionStatusEnum.INACTIVE);
         BigDecimal amount = subscriptionsActive.stream()
-                .flatMap(subscription -> subscription.getPayments().stream())
+                .flatMap(subscription ->
+                        subscription.getPayments() == null ?
+                                Stream.empty() :
+                                subscription.getPayments().stream())
                 .filter(payment -> payment.getStatus().equals(PaymentStatusEnum.APPROVED))
                 .map(Payment::getAmount)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);

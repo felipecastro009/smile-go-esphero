@@ -9,6 +9,7 @@ import com.smilego.smilego.infra.database.persistence.SubscriptionPersistence;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
+import java.util.Objects;
 
 @AllArgsConstructor
 public class SubscriptionRepositoryImpl implements SubscriptionRepository {
@@ -39,5 +40,14 @@ public class SubscriptionRepositoryImpl implements SubscriptionRepository {
     @Override
     public List<Subscription> findAllByStatusWithPayments(SubscriptionStatusEnum status) {
         return subscriptionPersistence.findAllByStatusWithPayments(status).stream().map(SubscriptionMapper::toDomain).toList();
+    }
+
+    @Override
+    public Subscription findById(Long id) {
+        SubscriptionEntity entity = subscriptionPersistence.findById(id).orElse(null);
+        if (entity == null) {
+            return null;
+        }
+        return SubscriptionMapper.toDomain(entity);
     }
 }
