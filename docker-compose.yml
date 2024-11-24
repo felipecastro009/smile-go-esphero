@@ -13,6 +13,7 @@ services:
     networks:
       - postgres
     restart: unless-stopped
+
   rabbitmq:
     image: rabbitmq:management
     container_name: rabbitmq
@@ -25,11 +26,23 @@ services:
       RABBITMQ_DEFAULT_VHOST: /
     networks:
       - rabbitmq_network
+    restart: unless-stopped
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - redis_network
+    restart: unless-stopped
 
 networks:
   postgres:
     driver: bridge
   rabbitmq_network:
+    driver: bridge
+  redis_network:
     driver: bridge
 
 volumes:
