@@ -15,6 +15,7 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -76,6 +77,41 @@ class SubscriptionRepositoryImplTest {
         assertEquals(expectedSubscription.getStatus(), resultSubscription.getStatus());
         assertEquals(expectedSubscription.getPlan(), resultSubscription.getPlan());
         verify(subscriptionPersistence).findAllByStatusWithPayments(SubscriptionStatusEnum.ACTIVE);
+    }
+
+    @Test
+    void shouldFindAllByStatusWithPaymentsWithSubscriptionsBetweenDates() {
+        SubscriptionEntity entity1 = new SubscriptionEntity();
+        entity1.setId(1L);
+        entity1.setStatus(SubscriptionStatusEnum.ACTIVE);
+        entity1.setPlan(SubscriptionPlanEnum.BASIC);
+        List<SubscriptionEntity> entities = List.of(entity1);
+        LocalDateTime startDate = LocalDate.now().atStartOfDay();
+        LocalDateTime endDate = LocalDateTime.now();
+        when(subscriptionPersistence.findAllByStatusWithPaymentsBetweenDates(SubscriptionStatusEnum.ACTIVE,startDate, endDate))
+                .thenReturn(entities);
+        List<Subscription> result = subscriptionRepository.findAllByStatusWithPaymentsBetweenDate(
+                startDate,
+                endDate,
+                SubscriptionStatusEnum.ACTIVE
+        );
+        Subscription expectedSubscription = new Subscription(
+                1L,
+                null,
+                SubscriptionPlanEnum.BASIC,
+                SubscriptionStatusEnum.ACTIVE,
+                new ArrayList<>(),
+                null,
+                null,
+                null,
+                null
+        );
+        assertEquals(1, result.size());
+        Subscription resultSubscription = result.get(0);
+        assertEquals(expectedSubscription.getId(), resultSubscription.getId());
+        assertEquals(expectedSubscription.getStatus(), resultSubscription.getStatus());
+        assertEquals(expectedSubscription.getPlan(), resultSubscription.getPlan());
+        verify(subscriptionPersistence).findAllByStatusWithPaymentsBetweenDates(SubscriptionStatusEnum.ACTIVE, startDate, endDate);
     }
 
     @Test

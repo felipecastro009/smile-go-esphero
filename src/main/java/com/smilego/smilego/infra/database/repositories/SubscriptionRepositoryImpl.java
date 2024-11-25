@@ -8,6 +8,9 @@ import com.smilego.smilego.infra.database.mappers.SubscriptionMapper;
 import com.smilego.smilego.infra.database.persistence.SubscriptionPersistence;
 import lombok.AllArgsConstructor;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @AllArgsConstructor
@@ -39,6 +42,11 @@ public class SubscriptionRepositoryImpl implements SubscriptionRepository {
     @Override
     public List<Subscription> findAllByStatusWithPayments(SubscriptionStatusEnum status) {
         return subscriptionPersistence.findAllByStatusWithPayments(status).stream().map(SubscriptionMapper::toDomain).toList();
+    }
+
+    @Override
+    public List<Subscription> findAllByStatusWithPaymentsBetweenDate(LocalDateTime startDate, LocalDateTime endDate, SubscriptionStatusEnum status) {
+        return subscriptionPersistence.findAllByStatusWithPaymentsBetweenDates(status, startDate, endDate).stream().map(SubscriptionMapper::toDomain).toList();
     }
 
     @Override
