@@ -1,6 +1,7 @@
-package com.smilego.smilego.application.usecases.reports;
+package com.smilego.smilego.unit.application.usecases.reports;
 
 import com.smilego.smilego.application.repositories.SubscriptionRepository;
+import com.smilego.smilego.application.usecases.reports.GetReportUseCase;
 import com.smilego.smilego.domain.Payment;
 import com.smilego.smilego.domain.Report;
 import com.smilego.smilego.domain.Subscription;

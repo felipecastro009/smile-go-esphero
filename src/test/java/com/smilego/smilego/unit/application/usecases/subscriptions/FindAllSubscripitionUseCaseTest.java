@@ -1,6 +1,7 @@
-package com.smilego.smilego.application.usecases.subscriptions;
+package com.smilego.smilego.unit.application.usecases.subscriptions;
 
 import com.smilego.smilego.application.repositories.SubscriptionRepository;
+import com.smilego.smilego.application.usecases.subscriptions.FindAllSubscriptionUseCase;
 import com.smilego.smilego.domain.Subscription;
 import com.smilego.smilego.domain.enums.SubscriptionPlanEnum;
 import com.smilego.smilego.domain.enums.SubscriptionStatusEnum;

@@ -1,6 +1,7 @@
-package com.smilego.smilego.application.usecases.payments;
+package com.smilego.smilego.unit.application.usecases.payments;
 
 import com.smilego.smilego.application.repositories.PaymentRepository;
+import com.smilego.smilego.application.usecases.payments.DeletePaymentUseCase;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

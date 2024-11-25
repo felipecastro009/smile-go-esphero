@@ -1,6 +1,7 @@
-package com.smilego.smilego.application.usecases.subscriptions;
+package com.smilego.smilego.unit.application.usecases.subscriptions;
 
 import com.smilego.smilego.application.repositories.SubscriptionRepository;
+import com.smilego.smilego.application.usecases.subscriptions.DeleteSubscriptionUseCase;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

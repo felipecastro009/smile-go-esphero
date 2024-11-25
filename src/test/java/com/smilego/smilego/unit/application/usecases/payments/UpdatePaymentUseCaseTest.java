@@ -1,8 +1,9 @@
-package com.smilego.smilego.application.usecases.payments;
+package com.smilego.smilego.unit.application.usecases.payments;
 
 import com.smilego.smilego.application.gateways.PaymentGateway;
 import com.smilego.smilego.application.repositories.PaymentRepository;
 import com.smilego.smilego.application.repositories.SubscriptionRepository;
+import com.smilego.smilego.application.usecases.payments.UpdatePaymentUseCase;
 import com.smilego.smilego.domain.Payment;
 import com.smilego.smilego.domain.Subscription;
 import com.smilego.smilego.domain.enums.PaymentMethodEnum;
@@ -24,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class CreatePaymentUseCaseTest {
+class UpdatePaymentUseCaseTest {
 
     @Mock
     private PaymentRepository paymentRepository;
@@ -36,7 +37,7 @@ class CreatePaymentUseCaseTest {
     private SubscriptionRepository subscriptionRepository;
 
     @InjectMocks
-    private CreatePaymentUseCase createPaymentUseCase;
+    private UpdatePaymentUseCase updatePaymentUseCase;
 
     @Test
     void testExecuteSuccess() {
@@ -44,7 +45,7 @@ class CreatePaymentUseCaseTest {
         Payment payment = new Payment(
                 1L,
                 subscriptionId,
-                BigDecimal.valueOf(100),
+                BigDecimal.valueOf(150),
                 PaymentStatusEnum.APPROVED,
                 PaymentMethodEnum.CREDIT_CARD,
                 LocalDateTime.now(),
@@ -62,14 +63,13 @@ class CreatePaymentUseCaseTest {
                 LocalDateTime.now(),
                 LocalDateTime.now()
         );
-        subscription.setId(subscriptionId);
         when(subscriptionRepository.findById(subscriptionId)).thenReturn(subscription);
-        when(paymentRepository.create(payment)).thenReturn(payment);
-        Payment result = createPaymentUseCase.execute(payment);
+        when(paymentRepository.update(payment)).thenReturn(payment);
+        Payment result = updatePaymentUseCase.execute(payment);
         assertEquals(payment, result);
         verify(subscriptionRepository, times(1)).findById(subscriptionId);
-        verify(paymentRepository, times(1)).create(payment);
-        verify(paymentGateway, times(1)).createTransaction(payment);
+        verify(paymentRepository, times(1)).update(payment);
+        verify(paymentGateway, times(1)).updateTransaction(payment);
     }
 
     @Test
@@ -78,7 +78,7 @@ class CreatePaymentUseCaseTest {
         Payment payment = new Payment(
                 1L,
                 subscriptionId,
-                BigDecimal.valueOf(100),
+                BigDecimal.valueOf(150),
                 PaymentStatusEnum.APPROVED,
                 PaymentMethodEnum.CREDIT_CARD,
                 LocalDateTime.now(),
@@ -86,9 +86,9 @@ class CreatePaymentUseCaseTest {
                 LocalDateTime.now()
         );
         when(subscriptionRepository.findById(subscriptionId)).thenReturn(null);
-        assertThrows(NotFoundError.class, () -> createPaymentUseCase.execute(payment));
+        assertThrows(NotFoundError.class, () -> updatePaymentUseCase.execute(payment));
         verify(subscriptionRepository, times(1)).findById(subscriptionId);
-        verify(paymentRepository, never()).create(any());
-        verify(paymentGateway, never()).createTransaction(any());
+        verifyNoInteractions(paymentRepository);
+        verifyNoInteractions(paymentGateway);
     }
 }

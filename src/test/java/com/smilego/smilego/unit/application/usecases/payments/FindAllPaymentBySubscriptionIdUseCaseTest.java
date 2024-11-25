@@ -1,6 +1,7 @@
-package com.smilego.smilego.application.usecases.payments;
+package com.smilego.smilego.unit.application.usecases.payments;
 
 import com.smilego.smilego.application.repositories.PaymentRepository;
+import com.smilego.smilego.application.usecases.payments.FindAllPaymentBySubscriptionIdUseCase;
 import com.smilego.smilego.domain.Payment;
 import com.smilego.smilego.domain.enums.PaymentMethodEnum;
 import com.smilego.smilego.domain.enums.PaymentStatusEnum;
