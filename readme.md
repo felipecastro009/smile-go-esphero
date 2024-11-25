@@ -24,9 +24,9 @@ Explique aqui em mais detalhes o propósito do projeto, os problemas que ele res
 
 ## Setup
 
-Para executar o projeto, basta rodar o comando abaixo:
+Para executar o projeto, você precisa de docker instalado na sua máquina e rodar o seguinte comando abaixo:
 
-Se for a primeira vez
+Se for a primeira vez (o first_setup já irá inicializar os containers)
 ```bash
 make first_setup
 ```
