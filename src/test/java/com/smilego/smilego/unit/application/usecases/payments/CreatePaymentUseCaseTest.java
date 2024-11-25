@@ -1,10 +1,12 @@
 package com.smilego.smilego.unit.application.usecases.payments;
 
+import com.smilego.smilego.application.cache.CacheAdapter;
 import com.smilego.smilego.application.gateways.PaymentGateway;
 import com.smilego.smilego.application.repositories.PaymentRepository;
 import com.smilego.smilego.application.repositories.SubscriptionRepository;
 import com.smilego.smilego.application.usecases.payments.CreatePaymentUseCase;
 import com.smilego.smilego.domain.Payment;
+import com.smilego.smilego.domain.Report;
 import com.smilego.smilego.domain.Subscription;
 import com.smilego.smilego.domain.enums.PaymentMethodEnum;
 import com.smilego.smilego.domain.enums.PaymentStatusEnum;
@@ -35,6 +37,9 @@ class CreatePaymentUseCaseTest {
 
     @Mock
     private SubscriptionRepository subscriptionRepository;
+
+    @Mock
+    private CacheAdapter<Report> cacheAdapter;
 
     @InjectMocks
     private CreatePaymentUseCase createPaymentUseCase;
@@ -71,6 +76,7 @@ class CreatePaymentUseCaseTest {
         verify(subscriptionRepository, times(1)).findById(subscriptionId);
         verify(paymentRepository, times(1)).create(payment);
         verify(paymentGateway, times(1)).createTransaction(payment);
+        verify(cacheAdapter, times(1)).clear("report");
     }
 
     @Test
@@ -91,5 +97,6 @@ class CreatePaymentUseCaseTest {
         verify(subscriptionRepository, times(1)).findById(subscriptionId);
         verify(paymentRepository, never()).create(any());
         verify(paymentGateway, never()).createTransaction(any());
+        verify(cacheAdapter, never()).clear(anyString());
     }
 }

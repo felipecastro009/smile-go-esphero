@@ -1,11 +1,13 @@
 package com.smilego.smilego.main;
 
+import com.smilego.smilego.application.cache.CacheAdapter;
 import com.smilego.smilego.application.events.ProcessUpdatePaymentEvent;
 import com.smilego.smilego.application.events.SendUpdatePaymentEvent;
 import com.smilego.smilego.application.gateways.PaymentGateway;
 import com.smilego.smilego.application.repositories.PaymentRepository;
 import com.smilego.smilego.application.repositories.SubscriptionRepository;
 import com.smilego.smilego.application.usecases.payments.*;
+import com.smilego.smilego.domain.Report;
 import com.smilego.smilego.infra.database.persistence.PaymentPersistence;
 import com.smilego.smilego.infra.database.repositories.PaymentRepositoryImpl;
 import com.smilego.smilego.infra.events.ProcessUpdatePaymentEventImpl;
@@ -37,9 +39,10 @@ public class PaymentConfig {
     public CreatePaymentUseCase createPaymentUseCase(
             PaymentRepository paymentRepository,
             PaymentGateway paymentGateway,
-            SubscriptionRepository subscriptionRepository
+            SubscriptionRepository subscriptionRepository,
+            CacheAdapter<Report> cacheAdapter
     ) {
-        return new CreatePaymentUseCase(paymentRepository, paymentGateway, subscriptionRepository);
+        return new CreatePaymentUseCase(paymentRepository, paymentGateway, subscriptionRepository, cacheAdapter);
     }
 
     @Bean
@@ -51,9 +54,10 @@ public class PaymentConfig {
     public UpdatePaymentUseCase updatePaymentUseCase(
             PaymentRepository paymentRepository,
             PaymentGateway paymentGateway,
-            SubscriptionRepository subscriptionRepository
+            SubscriptionRepository subscriptionRepository,
+            CacheAdapter<Report> cacheAdapter
     ) {
-        return new UpdatePaymentUseCase(paymentRepository, paymentGateway, subscriptionRepository);
+        return new UpdatePaymentUseCase(paymentRepository, paymentGateway, subscriptionRepository, cacheAdapter);
     }
 
     @Bean

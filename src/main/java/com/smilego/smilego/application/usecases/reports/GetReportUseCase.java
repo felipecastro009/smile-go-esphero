@@ -1,5 +1,6 @@
 package com.smilego.smilego.application.usecases.reports;
 
+import com.smilego.smilego.application.cache.CacheAdapter;
 import com.smilego.smilego.application.repositories.SubscriptionRepository;
 import com.smilego.smilego.domain.Payment;
 import com.smilego.smilego.domain.Report;
@@ -17,14 +18,24 @@ import java.util.stream.Stream;
 @AllArgsConstructor
 public class GetReportUseCase {
     private final SubscriptionRepository subscriptionRepository;
+    private final CacheAdapter<Report> cacheAdapter;
 
     public Report execute(LocalDate startDate, LocalDate endDate) {
-        List<Subscription>  subscriptionsActive = List.of();
-        List<Subscription>  subscriptionsCanceled = List.of();
+        List<Subscription>  subscriptionsActive;
+        List<Subscription>  subscriptionsCanceled;
 
-        if (startDate == null || endDate == null) {
+        Report report = cacheAdapter.get("report", "report:" + startDate + ":" + endDate);
+
+        if (report != null) {
+            return report;
+        }
+
+        if (startDate == null && endDate == null) {
             subscriptionsActive = subscriptionRepository.findAllByStatusWithPayments(SubscriptionStatusEnum.ACTIVE);
             subscriptionsCanceled = subscriptionRepository.findAllByStatusWithPayments(SubscriptionStatusEnum.INACTIVE);
+            Report newReport = getReport(subscriptionsActive, subscriptionsCanceled);
+            cacheAdapter.put("report", "report:" + startDate + ":" + endDate, newReport);
+            return newReport;
         }
 
         if (startDate != null && endDate != null) {
@@ -32,8 +43,15 @@ public class GetReportUseCase {
             LocalDateTime endOfDay = endDate.atTime(23, 59, 59);
             subscriptionsActive = subscriptionRepository.findAllByStatusWithPaymentsBetweenDate(startOfDay, endOfDay, SubscriptionStatusEnum.ACTIVE);
             subscriptionsCanceled = subscriptionRepository.findAllByStatusWithPaymentsBetweenDate(startOfDay, endOfDay, SubscriptionStatusEnum.INACTIVE);
+            Report newReport = getReport(subscriptionsActive, subscriptionsCanceled);
+            cacheAdapter.put("report", "report:" + startDate + ":" + endDate, newReport);
+            return newReport;
         }
 
+        return null;
+    }
+
+    private Report getReport(List<Subscription> subscriptionsActive, List<Subscription> subscriptionsCanceled) {
         BigDecimal amount = subscriptionsActive.stream()
                 .flatMap(subscription ->
                         subscription.getPayments() == null ?
