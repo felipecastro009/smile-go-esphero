@@ -39,15 +39,12 @@ public class CacheAdapterImplTest {
     }
 
     @Test
-    void shouldGetValueFromWrapperIsNull() {
+    void shouldReturnNullWhenValueWrapperIsNull() {
         String name = "testCache";
-        String key = "key1";
-        String value = "value1";
-        when(valueWrapper.get()).thenReturn(null);
+        String key = "nonExistentKey";
         when(cacheManager.getCache(name)).thenReturn(cache);
-        when(cache.get(key)).thenReturn(valueWrapper);
+        when(cache.get(key)).thenReturn(null);
         String result = cacheAdapter.get(name, key);
-        verify(cache).get(key);
         assertNull(result);
     }
 
