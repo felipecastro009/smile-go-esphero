@@ -37,6 +37,23 @@ services:
       - redis_network
     restart: unless-stopped
 
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile  # Se o Dockerfile estiver na mesma pasta
+    container_name: java-app
+    ports:
+      - "8080:8080"  # A porta exposta pelo seu serviço Java
+    networks:
+      - postgres
+      - rabbitmq_network
+      - redis_network
+    depends_on:
+      - postgres
+      - rabbitmq
+      - redis
+    restart: unless-stopped
+
 networks:
   postgres:
     driver: bridge
