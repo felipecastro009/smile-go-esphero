@@ -9,6 +9,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -18,8 +20,36 @@ public class CacheAdapterImplTest {
     private CacheManager cacheManager;
     @Mock
     private Cache cache;
+    @Mock
+    private Cache.ValueWrapper valueWrapper;
     @InjectMocks
     private CacheAdapterImpl<String> cacheAdapter;
+
+    @Test
+    void shouldGetValueFromCache() {
+        String name = "testCache";
+        String key = "key1";
+        String value = "value1";
+        when(valueWrapper.get()).thenReturn(value);
+        when(cacheManager.getCache(name)).thenReturn(cache);
+        when(cache.get(key)).thenReturn(valueWrapper);
+        String result = cacheAdapter.get(name, key);
+        verify(cache).get(key);
+        assertEquals(value, result);
+    }
+
+    @Test
+    void shouldGetValueFromWrapperIsNull() {
+        String name = "testCache";
+        String key = "key1";
+        String value = "value1";
+        when(valueWrapper.get()).thenReturn(null);
+        when(cacheManager.getCache(name)).thenReturn(cache);
+        when(cache.get(key)).thenReturn(valueWrapper);
+        String result = cacheAdapter.get(name, key);
+        verify(cache).get(key);
+        assertNull(result);
+    }
 
     @Test
     void shouldPutValueInCache() {

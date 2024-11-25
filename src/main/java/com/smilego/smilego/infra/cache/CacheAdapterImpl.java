@@ -2,6 +2,7 @@ package com.smilego.smilego.infra.cache;
 
 import com.smilego.smilego.application.cache.CacheAdapter;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 
 @AllArgsConstructor
@@ -15,7 +16,11 @@ public class CacheAdapterImpl<T> implements CacheAdapter<T> {
 
     @Override
     public T get(String name, String key) {
-        return (T) cacheManager.getCache(name).get(key);
+        Cache.ValueWrapper cache = cacheManager.getCache(name).get(key);
+        if (cache != null) {
+            return (T) cache.get();
+        }
+        return null;
     }
 
     @Override
