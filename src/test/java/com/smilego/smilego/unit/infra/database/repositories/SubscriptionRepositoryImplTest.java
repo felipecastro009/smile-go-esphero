@@ -3,6 +3,7 @@ package com.smilego.smilego.unit.infra.database.repositories;
 import com.smilego.smilego.domain.Subscription;
 import com.smilego.smilego.domain.enums.SubscriptionPlanEnum;
 import com.smilego.smilego.domain.enums.SubscriptionStatusEnum;
+import com.smilego.smilego.infra.database.entities.PaymentEntity;
 import com.smilego.smilego.infra.database.entities.SubscriptionEntity;
 import com.smilego.smilego.infra.database.mappers.SubscriptionMapper;
 import com.smilego.smilego.infra.database.persistence.SubscriptionPersistence;
@@ -14,8 +15,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -83,9 +82,11 @@ class SubscriptionRepositoryImplTest {
     @Test
     void shouldFindAllByStatusWithPaymentsWithSubscriptionsBetweenDates() {
         SubscriptionEntity entity1 = new SubscriptionEntity();
+        PaymentEntity paymentEntity = new PaymentEntity();
         entity1.setId(1L);
         entity1.setStatus(SubscriptionStatusEnum.ACTIVE);
         entity1.setPlan(SubscriptionPlanEnum.BASIC);
+        entity1.setPayments(List.of(paymentEntity));
         List<SubscriptionEntity> entities = List.of(entity1);
         LocalDateTime startDate = LocalDate.now().atStartOfDay();
         LocalDateTime endDate = LocalDateTime.now();
