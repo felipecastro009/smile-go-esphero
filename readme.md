@@ -19,7 +19,7 @@ Explique aqui em mais detalhes o propósito do projeto, os problemas que ele res
 - ✅ **Utilização de Cache**
 - ✅ **Criação de Relatórios**
 - ✅ **Testes unitários**
-- ✅ **Testes de integração (Não fiz de todas as classes)**
+- ✅ **Testes de integração (Não fiz de todas as classes, nem tive tempo de mockar algumas coisa como o redis, ou seja vai rodar com o docker ativo 🥺)**
 - ✅ **Documentação Swagger**
 
 ## Setup
