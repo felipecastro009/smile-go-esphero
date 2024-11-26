@@ -26,6 +26,8 @@ Explique aqui em mais detalhes o propósito do projeto, os problemas que ele res
 
 Para executar o projeto, você precisa de docker instalado na sua máquina e rodar o seguinte comando abaixo:
 
+### MacOS/Linux
+
 Se for a primeira vez (o first_setup já irá inicializar os containers)
 ```bash
 make first_setup
@@ -34,6 +36,18 @@ make first_setup
 Se for a segunda vez
 ```bash
 make start
+```
+
+### Windows
+
+Primeiro rode o seguinte comando
+```bash
+docker compose build --no-cache
+```
+
+Depois rode o seguinte comando
+```bash
+docker compose up --build 
 ```
 
 ## Comentários
