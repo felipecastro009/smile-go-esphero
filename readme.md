@@ -50,6 +50,19 @@ Depois rode o seguinte comando
 docker compose up --build 
 ```
 
+## Documentação Swagger
+
+Para acessar a documentação, basta acessar a url: http://localhost:8080/swagger-ui/index.html
+
+## Collection Insomnia
+
+[Download](./insomnia.json)
+
+## Testes
+
+### Coverage
+![coverage](./coverage.png)
+
 ## Comentários
 
 Fiz uso da clean architeture de forma que uso no dia a dia, utilizando adapters em toda a camada de infra, mas utilizando
