@@ -10,7 +10,7 @@ COPY src src
 RUN mvn package -DskipTests
 
 # Etapa final
-FROM amazoncorretto:23
+FROM maven:3.9-amazoncorretto-23-debian
 WORKDIR /app
 COPY --from=builder /usr/src/app/target/smile-go-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
